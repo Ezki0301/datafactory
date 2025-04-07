@@ -1,0 +1,20 @@
+{
+	"name": "SOURCE_DS_DB_0805",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS042024OracleM22",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "042024 ADF"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HR",
+			"table": "EMPLOYEES"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

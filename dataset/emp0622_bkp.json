@@ -1,0 +1,20 @@
+{
+	"name": "emp0622_bkp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OracleM22",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "0623 ADF 9AM"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HR",
+			"table": "ADF_EMPLOYEES_BKP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
