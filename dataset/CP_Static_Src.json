@@ -1,0 +1,26 @@
+{
+	"name": "CP_Static_Src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "0723WE"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "inputfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

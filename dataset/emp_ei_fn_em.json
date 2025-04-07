@@ -1,0 +1,20 @@
+{
+	"name": "emp_ei_fn_em",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OracleM22",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "0623 ADF 9AM"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HR",
+			"table": "ADF_EMP_BKP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

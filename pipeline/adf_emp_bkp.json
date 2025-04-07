@@ -1,0 +1,68 @@
+{
+	"name": "adf_emp_bkp",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "OracleSink",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ParameterisedDataSetFileName",
+						"type": "DatasetReference",
+						"parameters": {
+							"ContainerName": "inputfiles",
+							"FileName": "cust-1.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "emp_ei_fn_em",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "0623 ADF 9AM"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-10T04:32:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

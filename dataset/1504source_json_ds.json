@@ -1,0 +1,75 @@
+{
+	"name": "1504source_json_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_04_2024",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "042024 ADF"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "source"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"gender": {
+					"type": "string"
+				},
+				"age": {
+					"type": "integer"
+				},
+				"address": {
+					"type": "object",
+					"properties": {
+						"streetAddress": {
+							"type": "string"
+						},
+						"city": {
+							"type": "string"
+						},
+						"state": {
+							"type": "string"
+						}
+					}
+				},
+				"phoneNumbers": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"number": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"fruit": {
+					"type": "string"
+				},
+				"size": {
+					"type": "string"
+				},
+				"color": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

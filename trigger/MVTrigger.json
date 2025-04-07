@@ -1,0 +1,25 @@
+{
+	"name": "MVTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "moveactivity0623",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/inputfiles/blobs/dept",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/9c95ddcd-8514-41a4-9c6e-fcb0b86fc25c/resourceGroups/ADF_learning/providers/Microsoft.Storage/storageAccounts/aimoreetl",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

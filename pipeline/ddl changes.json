@@ -1,0 +1,182 @@
+{
+	"name": "ddl changes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "File_path",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Pipeline_name",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "email_cpy",
+								"value": "$$COLUMN:EMAIL"
+							},
+							{
+								"name": "FN",
+								"value": "$$COLUMN:FIRST_NAME"
+							},
+							{
+								"name": "Country",
+								"value": "India"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "EMPLOYEE_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EMPLOYEE_ID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FIRST_NAME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FIRST_NAME",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DynamicDS1704",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container_name": "sourcecsv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DynamicDS1704",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container_name": "targetcsv"
+						}
+					}
+				]
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Copy data1').output.filesread,activity('Copy data1').output.fileswritten)",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DynamicDS1704",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container_name": "sourcecsv"
+									}
+								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS_ABS",
+										"type": "LinkedServiceReference"
+									},
+									"path": "sourcejson"
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-05-03T13:40:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

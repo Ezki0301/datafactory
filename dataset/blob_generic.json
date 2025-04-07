@@ -1,0 +1,31 @@
+{
+	"name": "blob_generic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Container_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": {
+					"value": "@dataset().Container_name",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,88 @@
+{
+	"name": "ConditionalSplit",
+	"properties": {
+		"folder": {
+			"name": "06-23 ADF"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ParameterisedDataSetFileName",
+						"type": "DatasetReference"
+					},
+					"name": "Emp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ParameterisedDataSetFileName",
+						"type": "DatasetReference"
+					},
+					"name": "sink"
+				},
+				{
+					"dataset": {
+						"referenceName": "ParameterisedDataSetFileName",
+						"type": "DatasetReference"
+					},
+					"name": "EmpEmp"
+				},
+				{
+					"dataset": {
+						"referenceName": "ParameterisedDataSetFileName",
+						"type": "DatasetReference"
+					},
+					"name": "JrEmp"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPLOYEE_ID as integer,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          EMAIL as string,",
+				"          PHONE_NUMBER as string,",
+				"          HIRE_DATE as string,",
+				"          JOB_ID as string,",
+				"          SALARY as short,",
+				"          COMMISSION_PCT as double,",
+				"          MANAGER_ID as short,",
+				"          DEPARTMENT_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Emp",
+				"derivedColumn1 split(HIRE_Year< 2005,",
+				"     HIRE_Year >= 2005  &&  HIRE_Year<2007,",
+				"     disjoint: false) ~> split1@(SrEmp, Emp, JrEmp)",
+				"Emp derive(HIRE_Year = year(toTimestamp(concat(HIRE_DATE, ' 00:00:00'),'dd-MM-yy HH:mm:SS'))) ~> derivedColumn1",
+				"split1@SrEmp sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     filePattern:'Sr_Emp.csv',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink",
+				"split1@Emp sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     filePattern:'Emp.csv',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> EmpEmp",
+				"split1@JrEmp sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     filePattern:'Jr_Emp.csv',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> JrEmp"
+			]
+		}
+	}
+}

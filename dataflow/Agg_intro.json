@@ -1,0 +1,71 @@
+{
+	"name": "Agg_intro",
+	"properties": {
+		"folder": {
+			"name": "Apr-24"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DYDS1605",
+						"type": "DatasetReference"
+					},
+					"name": "readingempfile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DYDS1605",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggactivityemp"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPLOYEE_ID as short,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          EMAIL as string,",
+				"          PHONE_NUMBER as string,",
+				"          HIRE_DATE as string,",
+				"          JOB_ID as string,",
+				"          SALARY as short,",
+				"          COMMISSION_PCT as double,",
+				"          MANAGER_ID as short,",
+				"          DEPARTMENT_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> readingempfile",
+				"readingempfile aggregate(groupBy(DEPARTMENT_ID),",
+				"     sum_salary = sum(SALARY),",
+				"          emp_count = count(EMPLOYEE_ID)) ~> aggactivityemp",
+				"aggactivityemp filter(emp_count < 10) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          DEPARTMENT_ID as string,",
+				"          DEPARTMENT_NAME as string,",
+				"          MANAGER_ID as string,",
+				"          LOCATION_ID as string",
+				"     ),",
+				"     partitionFileNames:['emp_dept_agg.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

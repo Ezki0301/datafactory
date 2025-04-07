@@ -1,0 +1,125 @@
+{
+	"name": "Cp_blob_oracle_db",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "OracleSink",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FIRST_NAME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FIRST_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LAST_NAME",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LAST_NAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EMAIL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EMAIL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PHONE_NUMBER",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PHONE_NUMBER",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "JOB_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "JOB_ID",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DynamicDS1704",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container_name": "sourcecsv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "0705_emp",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "042024 ADF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-05-07T14:24:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
