@@ -1,0 +1,51 @@
+{
+	"name": "emp_union",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Merge",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"emp": {
+								"ContainerName": "dfinputfiles",
+								"FileName": "emp.csv"
+							},
+							"employees": {
+								"ContainerName": "dfinputfiles",
+								"FileName": "employees.csv"
+							},
+							"sink": {
+								"ContainerName": "dfoutputfiles",
+								"FileName": "empUnion.csv"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "0623 ADF 9AM"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-30T04:22:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

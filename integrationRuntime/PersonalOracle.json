@@ -1,0 +1,6 @@
+{
+	"name": "PersonalOracle",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

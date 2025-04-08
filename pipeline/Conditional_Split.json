@@ -1,0 +1,55 @@
+{
+	"name": "Conditional_Split",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "ConditionalSplit",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"Emp": {
+								"ContainerName": "dfinputfiles",
+								"FileName": "employees.csv"
+							},
+							"sink": {
+								"ContainerName": "dfoutputfiles",
+								"FileName": "sr_emp.csv"
+							},
+							"EmpEmp": {
+								"ContainerName": "dfoutputfiles",
+								"FileName": "emp.csv"
+							},
+							"JrEmp": {
+								"ContainerName": "dfoutputfiles",
+								"FileName": "jr_emp.csv"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "0623 ADF 9AM"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-28T08:03:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

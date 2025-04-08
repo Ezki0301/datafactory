@@ -1,0 +1,26 @@
+{
+	"name": "target_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_04_2024",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "042024 ADF"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "target"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

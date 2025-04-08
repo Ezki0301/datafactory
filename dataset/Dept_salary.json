@@ -1,0 +1,17 @@
+{
+	"name": "Dept_salary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Oracle_aimore",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "HR",
+			"table": "ADF_DEPT_SALARY"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
