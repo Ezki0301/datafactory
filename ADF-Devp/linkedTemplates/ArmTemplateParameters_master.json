@@ -1,0 +1,87 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-Devp"
+		},
+		"ADLS_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"Azure_Aimore_connectionString": {
+			"value": ""
+		},
+		"LS042024OracleM22_connectionString": {
+			"value": ""
+		},
+		"LS_04_2024_connectionString": {
+			"value": ""
+		},
+		"LS_ABS_connectionString": {
+			"value": ""
+		},
+		"Oracle1_connectionString": {
+			"value": ""
+		},
+		"OracleM22_connectionString": {
+			"value": ""
+		},
+		"Oracle_aimore_connectionString": {
+			"value": ""
+		},
+		"adls_para_accountKey": {
+			"value": ""
+		},
+		"ls_rg_dbaadmin_password": {
+			"value": ""
+		},
+		"lsaadls_connectionString": {
+			"value": ""
+		},
+		"lsablob_connectionString": {
+			"value": ""
+		},
+		"rgadls_accountKey": {
+			"value": ""
+		},
+		"rgaimoreblob_connectionString": {
+			"value": ""
+		},
+		"ADLS_properties_typeProperties_url": {
+			"value": "https://aimoreetl.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "0601-111017-3ifsxeta"
+		},
+		"MoviesGitHub_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv"
+		},
+		"adls_para_properties_typeProperties_url": {
+			"value": "@{linkedService().url_name}"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_server": {
+			"value": "aimoretest.database.windows.net"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_database": {
+			"value": "aimoretest"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_userName": {
+			"value": "dbaadmin"
+		},
+		"rgadls_properties_typeProperties_url": {
+			"value": "https://rgaimoreadls.dfs.core.windows.net/"
+		},
+		"MVTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/9c95ddcd-8514-41a4-9c6e-fcb0b86fc25c/resourceGroups/ADF_learning/providers/Microsoft.Storage/storageAccounts/aimoreetl"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

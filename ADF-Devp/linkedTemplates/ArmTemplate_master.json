@@ -1,0 +1,310 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Devp"
+		},
+		"ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ADLS'"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+		},
+		"Azure_Aimore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Azure_Aimore'"
+		},
+		"LS042024OracleM22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS042024OracleM22'"
+		},
+		"LS_04_2024_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_04_2024'"
+		},
+		"LS_ABS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABS'"
+		},
+		"Oracle1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Oracle1'"
+		},
+		"OracleM22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OracleM22'"
+		},
+		"Oracle_aimore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Oracle_aimore'"
+		},
+		"adls_para_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_para'"
+		},
+		"ls_rg_dbaadmin_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_rg_dbaadmin'"
+		},
+		"lsaadls_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsaadls'"
+		},
+		"lsablob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'lsablob'"
+		},
+		"rgadls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'rgadls'"
+		},
+		"rgaimoreblob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'rgaimoreblob'"
+		},
+		"ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://aimoreetl.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0601-111017-3ifsxeta"
+		},
+		"MoviesGitHub_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv"
+		},
+		"adls_para_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().url_name}"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "aimoretest.database.windows.net"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "aimoretest"
+		},
+		"ls_rg_dbaadmin_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "dbaadmin"
+		},
+		"rgadls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://rgaimoreadls.dfs.core.windows.net/"
+		},
+		"MVTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/9c95ddcd-8514-41a4-9c6e-fcb0b86fc25c/resourceGroups/ADF_learning/providers/Microsoft.Storage/storageAccounts/aimoreetl"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADF-Devp_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADLS_accountKey": {
+						"value": "[parameters('ADLS_accountKey')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"Azure_Aimore_connectionString": {
+						"value": "[parameters('Azure_Aimore_connectionString')]"
+					},
+					"LS_04_2024_connectionString": {
+						"value": "[parameters('LS_04_2024_connectionString')]"
+					},
+					"LS_ABS_connectionString": {
+						"value": "[parameters('LS_ABS_connectionString')]"
+					},
+					"adls_para_accountKey": {
+						"value": "[parameters('adls_para_accountKey')]"
+					},
+					"ls_rg_dbaadmin_password": {
+						"value": "[parameters('ls_rg_dbaadmin_password')]"
+					},
+					"lsaadls_connectionString": {
+						"value": "[parameters('lsaadls_connectionString')]"
+					},
+					"lsablob_connectionString": {
+						"value": "[parameters('lsablob_connectionString')]"
+					},
+					"rgadls_accountKey": {
+						"value": "[parameters('rgadls_accountKey')]"
+					},
+					"rgaimoreblob_connectionString": {
+						"value": "[parameters('rgaimoreblob_connectionString')]"
+					},
+					"ADLS_properties_typeProperties_url": {
+						"value": "[parameters('ADLS_properties_typeProperties_url')]"
+					},
+					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+					},
+					"MoviesGitHub_properties_typeProperties_url": {
+						"value": "[parameters('MoviesGitHub_properties_typeProperties_url')]"
+					},
+					"adls_para_properties_typeProperties_url": {
+						"value": "[parameters('adls_para_properties_typeProperties_url')]"
+					},
+					"ls_rg_dbaadmin_properties_typeProperties_server": {
+						"value": "[parameters('ls_rg_dbaadmin_properties_typeProperties_server')]"
+					},
+					"ls_rg_dbaadmin_properties_typeProperties_database": {
+						"value": "[parameters('ls_rg_dbaadmin_properties_typeProperties_database')]"
+					},
+					"ls_rg_dbaadmin_properties_typeProperties_userName": {
+						"value": "[parameters('ls_rg_dbaadmin_properties_typeProperties_userName')]"
+					},
+					"rgadls_properties_typeProperties_url": {
+						"value": "[parameters('rgadls_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ADF-Devp_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Devp_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ADF-Devp_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS042024OracleM22_connectionString": {
+						"value": "[parameters('LS042024OracleM22_connectionString')]"
+					},
+					"Oracle1_connectionString": {
+						"value": "[parameters('Oracle1_connectionString')]"
+					},
+					"OracleM22_connectionString": {
+						"value": "[parameters('OracleM22_connectionString')]"
+					},
+					"Oracle_aimore_connectionString": {
+						"value": "[parameters('Oracle_aimore_connectionString')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Devp_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ADF-Devp_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Devp_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ADF-Devp_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Devp_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "ADF-Devp_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"MVTrigger_properties_typeProperties_scope": {
+						"value": "[parameters('MVTrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Devp_ArmTemplate_4')]"
+			]
+		}
+	]
+}
